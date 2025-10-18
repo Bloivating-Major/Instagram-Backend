@@ -12,6 +12,10 @@ const authRouter = express.Router();
 authRouter.post("/register", async (req, res) =>{
     const {username, password} = req.body;
 
+    const existingUser = await userModel.findOne({username});
+
+    if(existingUser) return res.status(409).json({message : "Username already exist"});
+
     const user= await userModel.create({
         username,
         password
