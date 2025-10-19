@@ -11,6 +11,6 @@ app.get("/" , (req, res)=>{
     res.send("Server is running")
 })
 
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 module.exports = app;
