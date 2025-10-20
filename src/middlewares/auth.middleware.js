@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 
-async function authMiddleware(req, res){
+async function authMiddleware(req, res, next){
     const token = req.cookies.token;
 
     if(!token){
@@ -16,6 +16,7 @@ async function authMiddleware(req, res){
         req.user = user;
         next();
     }catch(err){
+        console.log(err);
         return res.status(401).json({
             message : "Invalid token, please login again!"
         })
